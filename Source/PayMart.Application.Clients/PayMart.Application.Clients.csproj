@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PayMart.Communication.Clients\PayMart.Communication.Clients.csproj" />
+    <ProjectReference Include="..\PayMart.Domain.Clients\PayMart.Domain.Clients.csproj" />
+    <ProjectReference Include="..\PayMart.Infrastructure.Clients\PayMart.Infrastructure.Clients.csproj" />
+  </ItemGroup>
+
 </Project>

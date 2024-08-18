@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PayMart.Application.Clients.UseCases.GetAll;
 
 namespace PayMart.API.Clients.Controllers;
 
@@ -7,8 +8,18 @@ namespace PayMart.API.Clients.Controllers;
 public class ClientController : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll(
+        [FromServices] IGetAllClientUseCase useCase)
     {
-        return Ok("Ola");
+        try
+        {
+            var response = await useCase.Execute();
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        
     }
 }
