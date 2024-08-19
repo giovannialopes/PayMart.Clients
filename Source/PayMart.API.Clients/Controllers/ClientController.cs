@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PayMart.Application.Clients.UseCases.Delete;
 using PayMart.Application.Clients.UseCases.GetAll;
 using PayMart.Application.Clients.UseCases.GetID;
 using PayMart.Application.Clients.UseCases.Post;
@@ -49,4 +50,15 @@ public class ClientController : ControllerBase
         var response = await useCase.Execute(request, id);
         return Ok(response);
     }
+
+    [HttpDelete]
+    [Route("delete/{id}")]
+    public async Task<IActionResult> Delete([FromRoute] int id,
+    [FromServices] IDeleteClientUseCase useCase)
+    {
+        await useCase.Execute(id);
+        return Ok();
+    }
+
+
 }

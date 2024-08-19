@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PayMart.Domain.Clients.Interfaces.Clients.Delete;
 using PayMart.Domain.Clients.Interfaces.Clients.GetAll;
 using PayMart.Domain.Clients.Interfaces.Clients.GetID;
 using PayMart.Domain.Clients.Interfaces.Clients.Post;
@@ -25,6 +26,7 @@ public static class DependencyInjectionInfra
         services.AddScoped<IGetID, ClientRepository>();
         services.AddScoped<IPost, ClientRepository>();
         services.AddScoped<IUpdate, ClientRepository>();
+        services.AddScoped<IDelete, ClientRepository>();
     }
 
     private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PayMart.Domain.Clients.Entities;
+using PayMart.Domain.Clients.Interfaces.Clients.Delete;
 using PayMart.Domain.Clients.Interfaces.Clients.GetAll;
 using PayMart.Domain.Clients.Interfaces.Clients.GetID;
 using PayMart.Domain.Clients.Interfaces.Clients.Post;
@@ -15,7 +16,8 @@ public class ClientRepository :
     IGetAll,
     IGetID,
     IPost,
-    IUpdate
+    IUpdate,
+    IDelete
 {
     private readonly DbClient _dbClient;
     public ClientRepository(DbClient dbClient)
@@ -34,4 +36,11 @@ public class ClientRepository :
 
     public async Task<Client?> GetIDUpdate(int id) => await _dbClient.Tb_Client.AsNoTracking().FirstOrDefaultAsync(config => config.ID == id);
     public void Update(Client client) =>  _dbClient.Tb_Client.Update(client);
+
+    public async Task Delete(int id)
+    {
+       var result = await _dbClient.Tb_Client.AsNoTracking().FirstOrDefaultAsync(config => config.ID == id);
+        _dbClient.Tb_Client.Remove(result);
+    }
+
 }
