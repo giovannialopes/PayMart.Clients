@@ -2,6 +2,7 @@
 using PayMart.Application.Clients.UseCases.GetAll;
 using PayMart.Application.Clients.UseCases.GetID;
 using PayMart.Application.Clients.UseCases.Post;
+using PayMart.Application.Clients.UseCases.Update;
 using PayMart.Domain.Clients.Entities;
 using PayMart.Domain.Clients.Request.Client;
 
@@ -11,7 +12,8 @@ namespace PayMart.API.Clients.Controllers;
 [ApiController]
 public class ClientController : ControllerBase
 {
-    [HttpGet("getAll")]
+    [HttpGet]
+    [Route("getAll")]
     public async Task<IActionResult> GetAll(
     [FromServices] IGetAllClientUseCase useCase)
     {
@@ -19,23 +21,32 @@ public class ClientController : ControllerBase
         return Ok(response);
     }
 
-    [HttpGet("getID/{id}")]
-    public async Task<IActionResult> GetID(int id,
+    [HttpGet]
+    [Route("getID/{id}")]
+    public async Task<IActionResult> GetID([FromRoute] int id,
     [FromServices] IGetIDClientUseCase useCase)
     {
         var response = await useCase.Execute(id);
         return Ok(response);
     }
 
-    [HttpPost("post")]
+    [HttpPost]
+    [Route("post")]
     public async Task<IActionResult> Post(
     [FromServices] IPostClientUseCase useCase,
     [FromBody] RequestClient request)
     {
         var response = await useCase.Execute(request);
         return Ok(response);
-
     }
 
-
+    [HttpPut]
+    [Route("update/{id}")]
+    public async Task<IActionResult> Update([FromRoute] int id,
+    [FromServices] IUpdateClientUseCase useCase,
+    [FromBody] RequestClient request)
+    {
+        var response = await useCase.Execute(request, id);
+        return Ok(response);
+    }
 }
