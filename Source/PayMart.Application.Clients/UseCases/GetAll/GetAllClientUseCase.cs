@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PayMart.Communication.Clients.Response.GetAll;
+using PayMart.Communication.Clients.Response.ListOfClient;
 using PayMart.Domain.Clients.Interfaces.Clients.GetAll;
 
 
@@ -7,22 +8,22 @@ namespace PayMart.Application.Clients.UseCases.GetAll;
 
 public class GetAllClientUseCase : IGetAllClientUseCase
 {
-    private readonly IGetAll _clientRepository;
-    private readonly IMapper _iMapper;
-    public GetAllClientUseCase(IGetAll clientRepository,
+    private readonly IGetAll _getAll;
+    private readonly IMapper _mapper;
+    public GetAllClientUseCase(IGetAll getAll,
         IMapper mapper)
     {
-        _clientRepository = clientRepository;
-        _iMapper = mapper;
+        _getAll = getAll;
+        _mapper = mapper;
     }
 
-    public async Task<ResponseGetAllClient> Execute()
+    public async Task<ResponseGetAll> Execute()
     {
-        var response = await _clientRepository.GetAll();
+        var response = await _getAll.GetAll();
 
-        return new ResponseGetAllClient
+        return new ResponseGetAll
         {
-            Clients = _iMapper.Map<List<ResponseListGetAllClient>>(response)
+            Clients = _mapper.Map<List<ResponseListClient>>(response)
         };
     }
 }

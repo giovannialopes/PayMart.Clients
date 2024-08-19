@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PayMart.Application.Clients.UseCases.GetAll;
+using PayMart.Application.Clients.UseCases.GetID;
 
 namespace PayMart.API.Clients.Controllers;
 
@@ -7,19 +8,19 @@ namespace PayMart.API.Clients.Controllers;
 [ApiController]
 public class ClientController : ControllerBase
 {
-    [HttpGet]
+    [HttpGet("getAll")]
     public async Task<IActionResult> GetAll(
         [FromServices] IGetAllClientUseCase useCase)
     {
-        try
-        {
-            var response = await useCase.Execute();
-            return Ok(response);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
-        
+        var response = await useCase.Execute();
+        return Ok(response);
+    }
+
+    [HttpGet("getID/{id}")]
+    public async Task<IActionResult> GetID(int id,
+    [FromServices] IGetIDClientUseCase useCase)
+    {
+        var response = await useCase.Execute(id);
+        return Ok(response);
     }
 }

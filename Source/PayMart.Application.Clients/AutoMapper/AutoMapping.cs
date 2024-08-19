@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PayMart.Communication.Clients.Response.GetAll;
+using PayMart.Communication.Clients.Response.ListOfClient;
 using PayMart.Domain.Clients.Entities;
 
 namespace PayMart.Application.Clients.AutoMapper;
@@ -19,8 +20,8 @@ public class AutoMapping : Profile
 
     private void EntityToResponse()
     {
-        CreateMap<Client, ResponseGetAllClient>();
-        CreateMap<Client, ResponseListGetAllClient>();
+        CreateMap<Client, ResponseGetAll>();
+        CreateMap<Client, ResponseListClient>();
     }
 }
 
