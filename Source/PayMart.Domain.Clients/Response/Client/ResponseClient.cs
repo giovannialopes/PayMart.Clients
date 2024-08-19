@@ -1,6 +1,6 @@
-﻿namespace PayMart.Communication.Clients.Response.ListOfClient;
+﻿namespace PayMart.Domain.Clients.Response.Client;
 
-public class ResponseListClient
+public class ResponseClient
 {
     public string Name { get; set; } = "";
     public string PhoneNumber { get; set; } = "";

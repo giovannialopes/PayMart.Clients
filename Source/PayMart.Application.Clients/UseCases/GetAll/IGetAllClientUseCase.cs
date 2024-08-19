@@ -1,8 +1,8 @@
-﻿using PayMart.Communication.Clients.Response.GetAll;
+﻿using PayMart.Domain.Clients.Response.ListOfClient;
 
 namespace PayMart.Application.Clients.UseCases.GetAll;
 
 public interface IGetAllClientUseCase
 {
-    Task<ResponseGetAll> Execute();
+    Task<ResponseList> Execute();
 }

@@ -1,8 +1,8 @@
-﻿using PayMart.Communication.Clients.Response.ListOfClient;
+﻿using PayMart.Domain.Clients.Response.Client;
 
 namespace PayMart.Application.Clients.UseCases.GetID;
 
 public interface IGetIDClientUseCase
 {
-    Task<ResponseListClient> Execute(int id);
+    Task<ResponseClient> Execute(int id);
 }

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using PayMart.Communication.Clients.Response.GetAll;
-using PayMart.Communication.Clients.Response.ListOfClient;
 using PayMart.Domain.Clients.Interfaces.Clients.GetAll;
+using PayMart.Domain.Clients.Response.Client;
+using PayMart.Domain.Clients.Response.ListOfClient;
 
 
 namespace PayMart.Application.Clients.UseCases.GetAll;
@@ -17,13 +17,13 @@ public class GetAllClientUseCase : IGetAllClientUseCase
         _mapper = mapper;
     }
 
-    public async Task<ResponseGetAll> Execute()
+    public async Task<ResponseList> Execute()
     {
         var response = await _getAll.GetAll();
 
-        return new ResponseGetAll
+        return new ResponseList
         {
-            Clients = _mapper.Map<List<ResponseListClient>>(response)
+            Clients = _mapper.Map<List<ResponseClient>>(response)
         };
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using PayMart.Application.Clients.AutoMapper;
 using PayMart.Application.Clients.UseCases.GetAll;
 using PayMart.Application.Clients.UseCases.GetID;
+using PayMart.Application.Clients.UseCases.Post;
 using PayMart.Domain.Clients.Interfaces.DbFunctions;
 using PayMart.Infrastructure.Clients.DataAcess;
 
@@ -26,5 +27,6 @@ public static class DependencyInjectionApp
         ///Metodos Padrões
         services.AddScoped<IGetAllClientUseCase, GetAllClientUseCase>();
         services.AddScoped<IGetIDClientUseCase, GetIDClientUseCase>();
+        services.AddScoped<IPostClientUseCase, PostClientUseCase>();
     }
 }

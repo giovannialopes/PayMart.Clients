@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using PayMart.Communication.Clients.Response.ListOfClient;
 using PayMart.Domain.Clients.Interfaces.Clients.GetID;
+using PayMart.Domain.Clients.Response.Client;
 
 namespace PayMart.Application.Clients.UseCases.GetID;
 
@@ -16,10 +16,10 @@ public class GetIDClientUseCase : IGetIDClientUseCase
         _mapper = mapper;
     }
 
-    public async Task<ResponseListClient> Execute(int id)
+    public async Task<ResponseClient> Execute(int id)
     {
         var response = await _getID.GetID(id);
 
-        return _mapper.Map<ResponseListClient>(response);
+        return _mapper.Map<ResponseClient>(response);
     }
 }
