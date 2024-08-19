@@ -34,6 +34,7 @@ public class ClientController : ControllerBase
     {
         var response = await useCase.Execute(request);
         return Ok(response);
+
     }
 
 
