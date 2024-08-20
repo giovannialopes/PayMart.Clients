@@ -1,13 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using PayMart.Application.Clients.AutoMapper;
 using PayMart.Application.Clients.UseCases.Delete;
 using PayMart.Application.Clients.UseCases.GetAll;
 using PayMart.Application.Clients.UseCases.GetID;
 using PayMart.Application.Clients.UseCases.Post;
 using PayMart.Application.Clients.UseCases.Update;
-using PayMart.Domain.Clients.Interfaces.DbFunctions;
-using PayMart.Infrastructure.Clients.DataAcess;
 
 namespace PayMart.Application.Clients.Injection;
 

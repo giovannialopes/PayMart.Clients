@@ -4,7 +4,6 @@ using PayMart.Application.Clients.UseCases.GetAll;
 using PayMart.Application.Clients.UseCases.GetID;
 using PayMart.Application.Clients.UseCases.Post;
 using PayMart.Application.Clients.UseCases.Update;
-using PayMart.Domain.Clients.Entities;
 using PayMart.Domain.Clients.Request.Client;
 
 namespace PayMart.API.Clients.Controllers;
