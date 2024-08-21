@@ -28,7 +28,7 @@ public class UpdateClientUseCase : IUpdateClientUseCase
 
         var response = _mapper.Map(request, takeID);
 
-        _update.Update(takeID);
+        _update.Update(response);
 
         await _commit.Commit();
 
