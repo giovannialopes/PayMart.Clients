@@ -16,7 +16,7 @@ public class ClientController : ControllerBase
     [HttpGet]
     [Route("getAll")]
     public async Task<IActionResult> GetAll(
-    [FromServices] IGetAllClientUseCase useCase)
+        [FromServices] IGetAllClientUseCase useCase)
     {
         var response = await useCase.Execute();
         return Ok(response);
@@ -25,18 +25,18 @@ public class ClientController : ControllerBase
     [HttpGet]
     [Route("getID/{id}")]
     public async Task<IActionResult> GetID([FromRoute] int id,
-    [FromServices] IGetIDClientUseCase useCase)
+        [FromServices] IGetIDClientUseCase useCase)
     {
         var response = await useCase.Execute(id);
         return Ok(response);
     }
 
     [HttpPost]
-    [Route("post/{id}")]
+    [Route("post/{userID}")]
     public async Task<IActionResult> Post(
     [FromServices] IPostClientUseCase useCase,
-    [FromBody] RequestClient request,
-    [FromRoute] int UserID)
+        [FromBody] RequestClient request,
+        [FromRoute] int UserID)
     {
         SaveResponse.SaveUserId(UserID);
         request.UserID = UserID;
@@ -45,13 +45,13 @@ public class ClientController : ControllerBase
     }
 
     [HttpPut]
-    [Route("update/{id}")]
-    public async Task<IActionResult> Update([FromRoute] int id,
-    [FromServices] IUpdateClientUseCase useCase,
-    [FromBody] RequestClient request)
+    [Route("update/{id}/{userID}")]
+    public async Task<IActionResult> Update([FromRoute] int id, int userID,
+        [FromServices] IUpdateClientUseCase useCase,
+        [FromBody] RequestClient request)
     {
         int UserID = SaveResponse.GetUserId();
-        request.UserID = UserID;
+        request.UserID = userID;
         var response = await useCase.Execute(request, id);
         return Ok(response);
     }
@@ -59,7 +59,7 @@ public class ClientController : ControllerBase
     [HttpDelete]
     [Route("delete/{id}")]
     public async Task<IActionResult> Delete([FromRoute] int id,
-    [FromServices] IDeleteClientUseCase useCase)
+        [FromServices] IDeleteClientUseCase useCase)
     {
         await useCase.Execute(id);
         return Ok();

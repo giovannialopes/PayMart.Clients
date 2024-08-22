@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PayMart.Infrastructure.Clients.DataAcess;
 
@@ -10,9 +11,11 @@ using PayMart.Infrastructure.Clients.DataAcess;
 namespace PayMart.Infrastructure.Clients.Migrations
 {
     [DbContext(typeof(DbClient))]
-    partial class DbClientModelSnapshot : ModelSnapshot
+    [Migration("20240822052050_EnabledUser")]
+    partial class EnabledUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,11 +26,11 @@ namespace PayMart.Infrastructure.Clients.Migrations
 
             modelBuilder.Entity("PayMart.Domain.Clients.Entities.Client", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -54,7 +57,7 @@ namespace PayMart.Infrastructure.Clients.Migrations
                     b.Property<int>("UserID")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
                     b.ToTable("Tb_Client");
                 });
