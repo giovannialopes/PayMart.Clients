@@ -21,7 +21,7 @@ public class DeleteClientUseCase : IDeleteClientUseCase
 
     public async Task Execute(int id)
     {
-         await _delete.Delete(id);
+        await _delete.Delete(id);
 
         await _commit.Commit();
     }

@@ -35,12 +35,17 @@ public class ClientRepository :
 
 
     public async Task<Client?> GetIDUpdate(int id) => await _dbClient.Tb_Client.AsNoTracking().FirstOrDefaultAsync(config => config.Id == id);
-    public void Update(Client client) =>  _dbClient.Tb_Client.Update(client);
+    public void Update(Client client) => _dbClient.Tb_Client.Update(client);
 
     public async Task Delete(int id)
     {
-       var result = await _dbClient.Tb_Client.AsNoTracking().FirstOrDefaultAsync(config => config.Id == id);
-        _dbClient.Tb_Client.Remove(result);
+        var result = await _dbClient.Tb_Client.AsNoTracking().FirstOrDefaultAsync(config => config.Id == id && config.Enabled == 1);
+        if (result != null)
+        {
+            result.Enabled = 0;
+            _dbClient.Tb_Client.Update(result);
+        }
+               
     }
 
 }
