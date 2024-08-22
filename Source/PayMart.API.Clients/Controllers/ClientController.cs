@@ -4,6 +4,7 @@ using PayMart.Application.Clients.UseCases.GetAll;
 using PayMart.Application.Clients.UseCases.GetID;
 using PayMart.Application.Clients.UseCases.Post;
 using PayMart.Application.Clients.UseCases.Update;
+using PayMart.Application.Clients.Utilities;
 using PayMart.Domain.Clients.Request.Client;
 
 namespace PayMart.API.Clients.Controllers;
@@ -31,11 +32,14 @@ public class ClientController : ControllerBase
     }
 
     [HttpPost]
-    [Route("post")]
+    [Route("post/{id}")]
     public async Task<IActionResult> Post(
     [FromServices] IPostClientUseCase useCase,
-    [FromBody] RequestClient request)
+    [FromBody] RequestClient request,
+    [FromRoute] int UserID)
     {
+        SaveResponse.SaveUserId(UserID);
+        request.UserID = UserID;
         var response = await useCase.Execute(request);
         return Ok(response);
     }
@@ -46,6 +50,8 @@ public class ClientController : ControllerBase
     [FromServices] IUpdateClientUseCase useCase,
     [FromBody] RequestClient request)
     {
+        int UserID = SaveResponse.GetUserId();
+        request.UserID = UserID;
         var response = await useCase.Execute(request, id);
         return Ok(response);
     }
