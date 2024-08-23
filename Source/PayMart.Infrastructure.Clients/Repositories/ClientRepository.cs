@@ -29,11 +29,7 @@ public class ClientRepository :
 
     public async Task<List<Client>> GetAll() => await _dbClient.Tb_Client.AsNoTracking().ToListAsync();
     public async Task<Client?> GetID(int id) => await _dbClient.Tb_Client.AsNoTracking().FirstOrDefaultAsync(config => config.Id == id);
-
-
     public async Task AddClient(Client client) => await _dbClient.Tb_Client.AddAsync(client);
-
-
     public async Task<Client?> GetIDUpdate(int id) => await _dbClient.Tb_Client.AsNoTracking().FirstOrDefaultAsync(config => config.Id == id);
     public void Update(Client client) => _dbClient.Tb_Client.Update(client);
 
