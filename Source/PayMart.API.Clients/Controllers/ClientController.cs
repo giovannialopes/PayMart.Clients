@@ -4,7 +4,6 @@ using PayMart.Application.Clients.UseCases.GetAll;
 using PayMart.Application.Clients.UseCases.GetID;
 using PayMart.Application.Clients.UseCases.Post;
 using PayMart.Application.Clients.UseCases.Update;
-using PayMart.Application.Clients.Utilities;
 using PayMart.Domain.Clients.Request.Client;
 
 namespace PayMart.API.Clients.Controllers;
@@ -19,6 +18,9 @@ public class ClientController : ControllerBase
         [FromServices] IGetAllClientUseCase useCase)
     {
         var response = await useCase.Execute();
+        if (response == null)
+            return Ok("");
+
         return Ok(response);
     }
 
@@ -28,6 +30,9 @@ public class ClientController : ControllerBase
         [FromServices] IGetIDClientUseCase useCase)
     {
         var response = await useCase.Execute(id);
+        if (response == null)
+            return Ok("");
+
         return Ok(response);
     }
 
@@ -38,9 +43,11 @@ public class ClientController : ControllerBase
         [FromBody] RequestClient request,
         [FromRoute] int UserID)
     {
-        SaveResponse.SaveUserId(UserID);
         request.UserID = UserID;
         var response = await useCase.Execute(request);
+        if (response == null)
+            return Ok("");
+
         return Ok(response);
     }
 
@@ -50,9 +57,11 @@ public class ClientController : ControllerBase
         [FromServices] IUpdateClientUseCase useCase,
         [FromBody] RequestClient request)
     {
-        int UserID = SaveResponse.GetUserId();
         request.UserID = userID;
         var response = await useCase.Execute(request, id);
+        if (response == null)
+            return Ok("");
+
         return Ok(response);
     }
 
@@ -61,8 +70,12 @@ public class ClientController : ControllerBase
     public async Task<IActionResult> Delete([FromRoute] int id,
         [FromServices] IDeleteClientUseCase useCase)
     {
-        await useCase.Execute(id);
+        var response = await useCase.Execute(id);
+        if (response == null)
+            return Ok("");
+
         return Ok();
+
     }
 
 

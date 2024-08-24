@@ -1,8 +1,9 @@
-﻿using PayMart.Domain.Clients.Response.Client;
+﻿using PayMart.Domain.Clients.Entities;
+using PayMart.Domain.Clients.Response.Client;
 
 namespace PayMart.Application.Clients.UseCases.Delete;
 
 public interface IDeleteClientUseCase
 {
-    Task Execute(int id);
+    Task<Client> Execute(int id);
 }

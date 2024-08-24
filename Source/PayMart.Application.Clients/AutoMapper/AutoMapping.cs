@@ -23,7 +23,10 @@ public class AutoMapping : Profile
     private void EntityToResponse()
     {
         CreateMap<Client, ResponseList>();
+        CreateMap<string, ResponseList>();
+
         CreateMap<Client, ResponseClient>();
+        CreateMap<string, ResponseClient>();
     }
 }
 

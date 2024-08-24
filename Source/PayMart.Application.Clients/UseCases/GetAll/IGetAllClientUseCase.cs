@@ -5,4 +5,5 @@ namespace PayMart.Application.Clients.UseCases.GetAll;
 public interface IGetAllClientUseCase
 {
     Task<ResponseList> Execute();
+
 }

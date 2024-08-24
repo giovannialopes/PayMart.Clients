@@ -1,25 +1,30 @@
 ﻿using AutoMapper;
-using PayMart.Domain.Clients.Interfaces.Clients.GetID;
+using PayMart.Domain.Clients.Exception.ResourceExceptions;
+using PayMart.Domain.Clients.Interfaces.Repositories;
 using PayMart.Domain.Clients.Response.Client;
 
 namespace PayMart.Application.Clients.UseCases.GetID;
 
 public class GetIDClientUseCase : IGetIDClientUseCase
 {
-    private readonly IGetID _getID;
     private readonly IMapper _mapper;
+    private readonly IClientRepository _clientRepository;
 
-    public GetIDClientUseCase(IGetID getID,
+    public GetIDClientUseCase(IClientRepository clientRepository,
         IMapper mapper)
     {
-        _getID = getID;
+        _clientRepository = clientRepository;
         _mapper = mapper;
     }
 
     public async Task<ResponseClient> Execute(int id)
     {
-        var response = await _getID.GetID(id);
+        var response = await _clientRepository.GetByIDClient(id);
+        if (response != null)
+        {
+            return _mapper.Map<ResponseClient>(response);
+        }
+        return null;
 
-        return _mapper.Map<ResponseClient>(response);
     }
 }

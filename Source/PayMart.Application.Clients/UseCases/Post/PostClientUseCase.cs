@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using PayMart.Domain.Clients.Entities;
-using PayMart.Domain.Clients.Interfaces.Clients.Post;
-using PayMart.Domain.Clients.Interfaces.DbFunctions;
+using PayMart.Domain.Clients.Exception.ResourceExceptions;
+using PayMart.Domain.Clients.Interfaces.Repositories;
 using PayMart.Domain.Clients.Request.Client;
 using PayMart.Domain.Clients.Response.Client;
 
@@ -9,26 +9,33 @@ namespace PayMart.Application.Clients.UseCases.Post;
 
 public class PostClientUseCase : IPostClientUseCase
 {
-    private readonly IPost _post;
     private readonly IMapper _mapper;
-    private readonly ICommit _commit;
-    public PostClientUseCase(IPost post,
+    private readonly IClientRepository _clientRepository;
+    private readonly IEmailRepository _emailRepository;
+
+    public PostClientUseCase(IClientRepository clientRepository,
         IMapper mapper,
-        ICommit commit)
+        IEmailRepository emailRepository)
     {
-        _post = post;
+        _clientRepository = clientRepository;
         _mapper = mapper;
-        _commit = commit;
+        _emailRepository = emailRepository;
     }
 
     public async Task<ResponseClient> Execute(RequestClient request)
     {
-        var Client = _mapper.Map<Client>(request);
+        var verifyEmail = await _emailRepository.VerifyEmail(request.Email);
 
-        await _post.AddClient(Client);
+        if (verifyEmail == false) {
 
-        await _commit.Commit();
+            var Client = _mapper.Map<Client>(request);
 
-        return _mapper.Map<ResponseClient>(Client);
+            _clientRepository.AddClient(Client);
+
+            await _clientRepository.Commit();
+
+            return _mapper.Map<ResponseClient>(Client);
+        }
+        return null;
     }
 }

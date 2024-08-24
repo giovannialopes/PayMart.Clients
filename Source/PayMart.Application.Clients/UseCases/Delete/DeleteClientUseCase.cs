@@ -1,28 +1,34 @@
 ﻿using AutoMapper;
-using PayMart.Domain.Clients.Interfaces.Clients.Delete;
-using PayMart.Domain.Clients.Interfaces.DbFunctions;
+using PayMart.Domain.Clients.Entities;
+using PayMart.Domain.Clients.Interfaces.Repositories;
 
 namespace PayMart.Application.Clients.UseCases.Delete;
 
 public class DeleteClientUseCase : IDeleteClientUseCase
 {
-    private readonly IDelete _delete;
-    private readonly ICommit _commit;
     private readonly IMapper _mapper;
+    private readonly IClientRepository _clientRepository;
 
-    public DeleteClientUseCase(IDelete delete,
-        ICommit commit,
+    public DeleteClientUseCase(IClientRepository clientRepository,
         IMapper mapper)
     {
-        _delete = delete;
-        _commit = commit;
+        _clientRepository = clientRepository;
         _mapper = mapper;
     }
 
-    public async Task Execute(int id)
+    public async Task<Client> Execute(int id)
     {
-        await _delete.Delete(id);
+        var Client = await _clientRepository.GetByIDClient(id);
 
-        await _commit.Commit();
+        if (Client != null) { 
+
+            _clientRepository.DeleteClient(Client!);
+            await _clientRepository.Commit();
+
+            return _mapper.Map<Client>(Client);
+        }
+
+        return null;
+
     }
 }
