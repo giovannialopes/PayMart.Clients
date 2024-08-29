@@ -41,8 +41,10 @@ public class ClientController : ControllerBase
     [Route("post/{userID}")]
     public async Task<IActionResult> Post(
     [FromServices] IRegisterClient services,
-        [FromBody] ModelClient.CreateClientRequest request)
+        [FromBody] ModelClient.CreateClientRequest request,
+        [FromRoute] int userID)
     {
+        request.UserId = userID;
         var response = await services.Execute(request);
         if (response == null)
             return Ok("");
