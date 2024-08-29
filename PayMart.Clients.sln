@@ -7,8 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{B547B5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.API.Clients", "Source\PayMart.API.Clients\PayMart.API.Clients.csproj", "{96FDA00C-8A24-4F0B-881E-0D57BB59B48E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.Application.Clients", "Source\PayMart.Application.Clients\PayMart.Application.Clients.csproj", "{5012BB46-1EFB-4109-BCE7-484CBB82BBEE}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.Domain.Clients", "Source\PayMart.Domain.Clients\PayMart.Domain.Clients.csproj", "{3B5467D3-0504-4C8A-8E7C-02E57A57E057}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.Infrastructure.Clients", "Source\PayMart.Infrastructure.Clients\PayMart.Infrastructure.Clients.csproj", "{32D31A8E-0E55-41FE-A0EC-1D487D8440D8}"
@@ -23,10 +21,6 @@ Global
 		{96FDA00C-8A24-4F0B-881E-0D57BB59B48E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96FDA00C-8A24-4F0B-881E-0D57BB59B48E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96FDA00C-8A24-4F0B-881E-0D57BB59B48E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5012BB46-1EFB-4109-BCE7-484CBB82BBEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5012BB46-1EFB-4109-BCE7-484CBB82BBEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5012BB46-1EFB-4109-BCE7-484CBB82BBEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5012BB46-1EFB-4109-BCE7-484CBB82BBEE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3B5467D3-0504-4C8A-8E7C-02E57A57E057}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3B5467D3-0504-4C8A-8E7C-02E57A57E057}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B5467D3-0504-4C8A-8E7C-02E57A57E057}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,7 +35,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{96FDA00C-8A24-4F0B-881E-0D57BB59B48E} = {B547B513-5A24-438A-92D3-A3AE0513CE28}
-		{5012BB46-1EFB-4109-BCE7-484CBB82BBEE} = {B547B513-5A24-438A-92D3-A3AE0513CE28}
 		{3B5467D3-0504-4C8A-8E7C-02E57A57E057} = {B547B513-5A24-438A-92D3-A3AE0513CE28}
 		{32D31A8E-0E55-41FE-A0EC-1D487D8440D8} = {B547B513-5A24-438A-92D3-A3AE0513CE28}
 	EndGlobalSection

@@ -6,7 +6,7 @@ namespace PayMart.Domain.Clients.Interfaces.Repositories;
 public interface IClientRepository : ICommit
 {
     public Task<List<Client>> GetClients();
-    public Task<Client?> GetByIDClient(int id);
+    public Task<Client?> GetClientByID(int id);
     public void AddClient(Client client);
     public void UpdateClient(Client client);
     public void DeleteClient(Client client);

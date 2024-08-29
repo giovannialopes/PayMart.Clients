@@ -12,5 +12,5 @@ public class EmailRepository : IEmailRepository
     public async Task Commit() => await _dbClient.SaveChangesAsync();
 
     public async Task<bool?> VerifyEmail(string email) => await _dbClient.Tb_Client.AsNoTracking()
-        .AnyAsync(config => config.Email == email);
+        .AnyAsync(config => config.ContactEmail == email);
 }

@@ -1,6 +1,6 @@
+using PayMart.Domain.Clients.Services.AInjection;
 using PayMart.Infrastructure.Clients.Injection;
 using PayMart.Infrastructure.Clients.Migrations;
-using PayMart.Application.Clients.Injection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddInfrastructure(builder.Configuration);
-builder.Services.AddApplication();
+builder.Services.AddServices();
 
 
 var app = builder.Build();

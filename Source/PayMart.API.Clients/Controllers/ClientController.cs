@@ -4,7 +4,7 @@ using PayMart.Application.Clients.UseCases.GetAll;
 using PayMart.Application.Clients.UseCases.GetID;
 using PayMart.Application.Clients.UseCases.Post;
 using PayMart.Application.Clients.UseCases.Update;
-using PayMart.Domain.Clients.Request.Client;
+using PayMart.Domain.Clients.Model;
 
 namespace PayMart.API.Clients.Controllers;
 
@@ -15,9 +15,9 @@ public class ClientController : ControllerBase
     [HttpGet]
     [Route("getAll")]
     public async Task<IActionResult> GetAll(
-        [FromServices] IGetAllClientUseCase useCase)
+        [FromServices] IGetAllClient services)
     {
-        var response = await useCase.Execute();
+        var response = await services.Execute();
         if (response == null)
             return Ok("");
 
@@ -26,10 +26,11 @@ public class ClientController : ControllerBase
 
     [HttpGet]
     [Route("getID/{id}")]
-    public async Task<IActionResult> GetID([FromRoute] int id,
-        [FromServices] IGetIDClientUseCase useCase)
+    public async Task<IActionResult> GetID(
+        [FromRoute] int id,
+        [FromServices] IGetClientByID services)
     {
-        var response = await useCase.Execute(id);
+        var response = await services.Execute(id);
         if (response == null)
             return Ok("");
 
@@ -39,12 +40,10 @@ public class ClientController : ControllerBase
     [HttpPost]
     [Route("post/{userID}")]
     public async Task<IActionResult> Post(
-    [FromServices] IPostClientUseCase useCase,
-        [FromBody] RequestClient request,
-        [FromRoute] int UserID)
+    [FromServices] IRegisterClient services,
+        [FromBody] ModelClient.CreateClientRequest request)
     {
-        request.UserID = UserID;
-        var response = await useCase.Execute(request);
+        var response = await services.Execute(request);
         if (response == null)
             return Ok("");
 
@@ -53,12 +52,13 @@ public class ClientController : ControllerBase
 
     [HttpPut]
     [Route("update/{id}/{userID}")]
-    public async Task<IActionResult> Update([FromRoute] int id, int userID,
-        [FromServices] IUpdateClientUseCase useCase,
-        [FromBody] RequestClient request)
+    public async Task<IActionResult> Update(
+        [FromRoute] int id, int userID,
+        [FromServices] IUpdateClient services,
+        [FromBody] ModelClient.UpdateClientRequest request)
     {
-        request.UserID = userID;
-        var response = await useCase.Execute(request, id);
+        request.UpdatedBy = userID;
+        var response = await services.Execute(request, id);
         if (response == null)
             return Ok("");
 
@@ -67,14 +67,15 @@ public class ClientController : ControllerBase
 
     [HttpDelete]
     [Route("delete/{id}")]
-    public async Task<IActionResult> Delete([FromRoute] int id,
-        [FromServices] IDeleteClientUseCase useCase)
+    public async Task<IActionResult> Delete(
+        [FromRoute] int id,
+        [FromServices] IDeleteClient services)
     {
-        var response = await useCase.Execute(id);
+        var response = await services.Execute(id);
         if (response == null)
             return Ok("");
 
-        return Ok();
+        return Ok("Delete");
 
     }
 
