@@ -117,19 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ERRO_DELETE" xml:space="preserve">
-    <value>Não foi possivel deletar esse usuário.</value>
-  </data>
-  <data name="ERRO_DESCONHECIDO" xml:space="preserve">
-    <value>Erro Desconhecido.</value>
-  </data>
-  <data name="ERRO_EMAIL_INVALIDO" xml:space="preserve">
-    <value>Email inválido.</value>
-  </data>
   <data name="ERRO_EMAIL_REGISTRADO" xml:space="preserve">
-    <value>Email já registrado.</value>
+    <value>ERRO - Esse email já está registrado.</value>
   </data>
   <data name="ERRO_NAO_POSSUI_CLIENT" xml:space="preserve">
-    <value>Não foi possivel encontrar clientes.</value>
+    <value>ERRO - Não foi possível encontrar o cliente.</value>
   </data>
 </root>

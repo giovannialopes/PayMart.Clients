@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PayMart.Application.Clients.UseCases.Delete;
-using PayMart.Application.Clients.UseCases.GetAll;
-using PayMart.Application.Clients.UseCases.GetID;
-using PayMart.Application.Clients.UseCases.Post;
-using PayMart.Application.Clients.UseCases.Update;
+using PayMart.Domain.Clients.Exception;
 using PayMart.Domain.Clients.Model;
+using PayMart.Domain.Clients.Services;
 
 namespace PayMart.API.Clients.Controllers;
 
@@ -15,11 +12,11 @@ public class ClientController : ControllerBase
     [HttpGet]
     [Route("getAll")]
     public async Task<IActionResult> GetAll(
-        [FromServices] IGetAllClient services)
+        [FromServices] IClientServices services)
     {
-        var response = await services.Execute();
+        var response = await services.GetClient();
         if (response == null)
-            return Ok("");
+            return Ok(ResourceExceptions.ERRO_NAO_POSSUI_CLIENT);
 
         return Ok(response);
     }
@@ -27,58 +24,58 @@ public class ClientController : ControllerBase
     [HttpGet]
     [Route("getID/{id}")]
     public async Task<IActionResult> GetID(
-        [FromRoute] int id,
-        [FromServices] IGetClientByID services)
+        [FromServices] IClientServices services,
+        [FromRoute] int id)
     {
-        var response = await services.Execute(id);
+        var response = await services.GetClientById(id);
         if (response == null)
-            return Ok("");
+            return Ok(ResourceExceptions.ERRO_NAO_POSSUI_CLIENT);
 
         return Ok(response);
     }
 
     [HttpPost]
     [Route("post/{userID}")]
-    public async Task<IActionResult> Post(
-    [FromServices] IRegisterClient services,
-        [FromBody] ModelClient.CreateClientRequest request,
-        [FromRoute] int userID)
+    public async Task<IActionResult> RegisterClient(
+    [FromServices] IClientServices services,
+        [FromRoute] int userID,
+        [FromBody] ModelClient.CreateClientRequest request)
     {
         request.UserId = userID;
-        var response = await services.Execute(request);
+        var response = await services.RegisterClient(request);
         if (response == null)
-            return Ok("");
+            return Ok(ResourceExceptions.ERRO_EMAIL_REGISTRADO);
 
         return Ok(response);
     }
 
     [HttpPut]
     [Route("update/{id}/{userID}")]
-    public async Task<IActionResult> Update(
-        [FromRoute] int id, int userID,
-        [FromServices] IUpdateClient services,
+    public async Task<IActionResult> UpdateClient(
+        [FromServices] IClientServices services,
+        [FromRoute] int id,
+        [FromRoute] int userID,
         [FromBody] ModelClient.UpdateClientRequest request)
     {
         request.UpdatedBy = userID;
-        var response = await services.Execute(request, id);
+        var response = await services.UpdateClient(request, id);
         if (response == null)
-            return Ok("");
+            return Ok(ResourceExceptions.ERRO_NAO_POSSUI_CLIENT);
 
         return Ok(response);
     }
 
     [HttpDelete]
     [Route("delete/{id}")]
-    public async Task<IActionResult> Delete(
-        [FromRoute] int id,
-        [FromServices] IDeleteClient services)
+    public async Task<IActionResult> DeleteClient(
+        [FromServices] IClientServices services,
+        [FromRoute] int id)
     {
-        var response = await services.Execute(id);
+        var response = await services.DeleteClient(id);
         if (response == null)
-            return Ok("");
+            return Ok(ResourceExceptions.ERRO_NAO_POSSUI_CLIENT);
 
-        return Ok("Delete");
-
+        return Ok();
     }
 
 

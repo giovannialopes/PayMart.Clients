@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PayMart.Domain.Clients.Exception.ResourceExceptions {
+namespace PayMart.Domain.Clients.Exception {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace PayMart.Domain.Clients.Exception.ResourceExceptions {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PayMart.Domain.Clients.Exception.ResourceExceptions.ResourceExceptions", typeof(ResourceExceptions).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PayMart.Domain.Clients.Exception.ResourceExceptions", typeof(ResourceExceptions).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,34 +61,7 @@ namespace PayMart.Domain.Clients.Exception.ResourceExceptions {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Não foi possivel deletar esse usuário..
-        /// </summary>
-        public static string ERRO_DELETE {
-            get {
-                return ResourceManager.GetString("ERRO_DELETE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Erro Desconhecido..
-        /// </summary>
-        public static string ERRO_DESCONHECIDO {
-            get {
-                return ResourceManager.GetString("ERRO_DESCONHECIDO", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Email inválido..
-        /// </summary>
-        public static string ERRO_EMAIL_INVALIDO {
-            get {
-                return ResourceManager.GetString("ERRO_EMAIL_INVALIDO", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Email já registrado..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a ERRO - Esse email já está registrado..
         /// </summary>
         public static string ERRO_EMAIL_REGISTRADO {
             get {
@@ -97,7 +70,7 @@ namespace PayMart.Domain.Clients.Exception.ResourceExceptions {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Não foi possivel encontrar clientes..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a ERRO - Não foi possível encontrar o cliente..
         /// </summary>
         public static string ERRO_NAO_POSSUI_CLIENT {
             get {
