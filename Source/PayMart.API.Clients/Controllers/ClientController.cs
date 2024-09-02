@@ -34,21 +34,6 @@ public class ClientController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPost]
-    [Route("post/{userID}")]
-    public async Task<IActionResult> RegisterClient(
-    [FromServices] IClientServices services,
-        [FromRoute] int userID,
-        [FromBody] ModelClient.CreateClientRequest request)
-    {
-        request.UserId = userID;
-        var response = await services.RegisterClient(request);
-        if (response == null)
-            return Ok(ResourceExceptions.ERRO_EMAIL_REGISTRADO);
-
-        return Ok(response);
-    }
-
     [HttpPut]
     [Route("update/{id}/{userID}")]
     public async Task<IActionResult> UpdateClient(
@@ -75,7 +60,7 @@ public class ClientController : ControllerBase
         if (response == null)
             return Ok(ResourceExceptions.ERRO_NAO_POSSUI_CLIENT);
 
-        return Ok();
+        return Ok(response);
     }
 
 

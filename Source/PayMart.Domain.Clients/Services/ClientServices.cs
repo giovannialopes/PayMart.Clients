@@ -2,7 +2,6 @@
 using PayMart.Domain.Clients.Entities;
 using PayMart.Domain.Clients.Interfaces.Repositories;
 using PayMart.Domain.Clients.Model;
-using PayMart.Domain.Clients.Services.Update;
 
 namespace PayMart.Domain.Clients.Services;
 
@@ -66,7 +65,7 @@ public class ClientServices(IClientRepository clientRepository,
         return default;
     }
 
-    public async Task<Client?> DeleteClient(int id)
+    public async Task<string?> DeleteClient(int id)
     {
         var Client = await clientRepository.GetClientByID(id);
         if (Client != null)
@@ -79,7 +78,7 @@ public class ClientServices(IClientRepository clientRepository,
             clientRepository.DeleteClient(Client!);
             await clientRepository.Commit();
 
-            return mapper.Map<Client>(Client);
+            return "Deleted";
         }
         return default;
     }

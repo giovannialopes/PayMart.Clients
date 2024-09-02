@@ -13,5 +13,5 @@ public interface IClientServices
 
     Task<ModelClient.ClientResponse?> UpdateClient(ModelClient.UpdateClientRequest request, int id);
 
-    Task<Client?> DeleteClient(int id);
+    Task<string?> DeleteClient(int id);
 }
