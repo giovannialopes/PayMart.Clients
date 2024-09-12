@@ -34,6 +34,23 @@ public class ClientController : ControllerBase
         return Ok(response);
     }
 
+    [HttpPost]
+    [Route("post/{userId}")]
+    public async Task<IActionResult> UpdateClient(
+        [FromServices] IClientServices services,
+        [FromRoute] int id,
+        [FromRoute] int userID,
+        [FromBody] ModelClient.CreateClientRequest request)
+    {
+        request.UserId = userID;
+        var response = await services.RegisterClient(request);
+        if (response == null)
+            return Ok(ResourceExceptions.ERRO_NAO_POSSUI_CLIENT);
+
+        return Ok(response);
+    }
+
+
     [HttpPut]
     [Route("update/{id}/{userID}")]
     public async Task<IActionResult> UpdateClient(
